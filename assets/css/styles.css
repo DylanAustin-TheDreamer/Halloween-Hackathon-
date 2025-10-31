@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Jolly+Lodger&family=Shadows+Into+Light+Two&display=swap');
 
+:root {
+	--Header-Font: 'Creepster', cursive;
+	--Body-Font: 'Jolly Lodger', cursive;
+	--UI-Font: 'Shadows Into Light Two', cursive;
+}
+
 * {
       margin: 0;
       padding: 0;
