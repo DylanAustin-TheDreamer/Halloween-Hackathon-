@@ -127,19 +127,24 @@ body{
 	align-items: center;
 }
 #enter-library {
-	
-	background-color: rgb(75, 29, 29);
-	border: 2px solid black;
-	color: white;
-	padding: 10px;
-	margin: 20px;
-	font-size: 24px;
-	cursor: pointer;
-	position: fixed;
-	z-index: 999;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    background-color: rgb(75, 29, 29);
+    border: 2px solid black;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#enter-library img {
+    width: 30px;  /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+    margin-right: 8px; /* Space between image and text */
 }
 #my-title {
 	font-size: 48px;
