@@ -67,7 +67,7 @@ const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
 let message = document.getElementById('message');
 // declare and load audio files and volume settings
-// Custom input range styling
+// Custom input volume styling
 const inputRange = document.querySelector('.custom-input');
 
     inputRange.addEventListener('input', function () {
