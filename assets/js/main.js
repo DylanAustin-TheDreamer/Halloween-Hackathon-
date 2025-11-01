@@ -90,28 +90,38 @@ const buttonPlay = document.getElementById('start-button');
 function animatePumpkin() {
     pumpkinImg.classList.remove('ghost');
     pumpkinImg.classList.add('ghost-visible');
+    dungeon = false;
     death = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+
+    returnToGame();
 }
 // function to activate ghost and change music
 function animateGhosts() {
     ghostImg.classList.remove('ghost');
     ghostImg.classList.add('ghost-visible');
+    dungeon = false;
     death = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+
+    returnToGame();
 }
 function animateCup(){
     cupImg.classList.remove('ghost');
     cupImg.classList.add('ghost-visible');
+    dungeon = false;
+    death = false;
     complete = true;
     stopAllMusic();
     console.log('Cup animation triggered: playing successMusic');
     checkStates();
     confetti();
+
+    returnToGame();
 }
 
 // stop all music function
@@ -257,7 +267,7 @@ function startGame() {
     buttonPlay.style.display = 'none';
     dungeonMusic.currentTime = 0;
     dungeonMusic.play();
-    document.getElementById('modal').classList.add('fade-out');
+    modal.classList.add('fade-out');
     loadRiddle();
 }
 
@@ -295,3 +305,33 @@ confetti({
   origin: { y: 0.6 },
   colors: ['#ff430aff', '#ff7b47ff', '#ffb570ff', '#ff1e00ff', '#ff0040ff']
 });
+
+
+// Here is for dealing with after in game animation states.
+function returnToGame() {
+  if(death){
+  deathMusic.addEventListener('ended', function() {
+  death = false;
+  ghostImg.classList.remove('ghost-visible');
+  ghostImg.classList.add('ghost');
+  pumpkinImg.classList.remove('ghost-visible');
+  pumpkinImg.classList.add('ghost');
+  stopAllMusic();
+  dungeon = true;
+  checkStates();
+  modal.classList.add('fade-out');
+  loadRiddle();
+});
+  } else if (complete){
+  successMusic.addEventListener('ended', function() {
+  complete = false;
+  cupImg.classList.remove('ghost-visible');
+  cupImg.classList.add('ghost');
+  stopAllMusic();
+  dungeon = true;
+  checkStates();
+  modal.classList.add('fade-out');
+  loadRiddle();
+});
+  }
+}
