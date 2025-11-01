@@ -20,3 +20,17 @@ mute.addEventListener('click', () => {
         backgroundMusic.play();
     }
 });
+
+// Custom input range styling
+const inputRange = document.querySelector('.custom-input');
+
+    inputRange.addEventListener('input', function () {
+    const progress = (inputRange.value - inputRange.min) / (inputRange.max - inputRange.min) * 100;
+    inputRange.style.background = `linear-gradient(...)`;
+    // Update all audio volumes
+    const newVolume = inputRange.value / 100;
+    backgroundMusic.volume = newVolume;
+    dungeonMusic.volume = newVolume;
+    deathMusic.volume = newVolume;
+    successMusic.volume = newVolume;
+});
