@@ -12,6 +12,15 @@
 	</head>
 	
 	<body style="background-color: #4e4e4e; background-image: url('assets/images/cellar.png'); background-repeat: no-repeat; background-size: cover;">
+		<div id="modal"></div>
+		<button id="start-button">Press To Begin</button>
+		<div style="position: fixed ; z-index: 999; pointer-events: none;">
+			<img src="assets/images/ghost.png" alt="Image of a ghost" class="ghost" id="ghost" style="width: 450px; height: auto;">
+		</div>
+		<div style="position: fixed ; z-index: 999; pointer-events: none;">
+			<img src="assets/images/sad pumpkin.png" alt="Image of a sad pumpkin" class="ghost" id="pumpkin" style="width: 450px; height: auto;">
+		</div>
+
 		<div class="book container d-flex justify-content-center align-items-center gap-1 row ">
             <!-- Left side of grid -->
 			<div style="flex: 0">
@@ -39,8 +48,6 @@
 
 		</div>
 
-
-		<script src="assets/js/dylan.js"></script>
 		<script src="assets/js/main.js"></script>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

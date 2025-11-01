@@ -21,7 +21,7 @@ body{
 	text-align: center;
 }
 .game-body {
-	background: url("../images/Gandalf.png") no-repeat center center fixed;
+	background: url("../images/gandalf-halloween.png") no-repeat center center fixed;
 	background-size: cover;
 	color: #f5f5f5;
 	display: flex;
@@ -126,6 +126,20 @@ body{
 	justify-content: center;
 	align-items: center;
 }
+#enter-library {
+	background-color: rgb(75, 29, 29);
+	border: 2px solid black;
+	color: white;
+	padding: 10px;
+	margin: 20px;
+	font-size: 24px;
+	cursor: pointer;
+	position: fixed;
+	z-index: 999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 #my-title {
 	font-size: 48px;
 	color: white;
@@ -145,11 +159,12 @@ body{
 	justify-content: center;
 	align-items: center;  
 	z-index: 998;
-	transition: opacity 7s ease-in-out;
+	transition: opacity 3s ease-in-out;
 	opacity: 1;
 }
 #modal.fade-out {
 	opacity: 0;
+	transition: opacity 7s ease-in-out;
 	pointer-events: none;
 }
 
