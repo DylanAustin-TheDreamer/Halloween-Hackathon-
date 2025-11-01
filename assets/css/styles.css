@@ -225,19 +225,19 @@ body{
 }
 
 
-/* Veronica */
+
 /* Small phones */
 @media (max-width: 480px) {
   /* Styles for very small screens */
   #mute-button img {
-	width:85%;
+	width:95%;
 	height: 70px; 
   }
 
   .page-left, .page-right {
 	background: url('../images/Parchment.jpg') no-repeat center center;
-	width: 85%;
-	height: 300px;
+	width: 95%;
+	height: 150px;
 	border: 2px solid #000;
 	border-radius: 10px;
 	padding: 20px;
@@ -249,13 +249,13 @@ body{
 @media (max-width: 768px) {
   /* Styles for most smartphones */
 	 #mute-button img {
-	width:80%;
+	width:90%;
 	height: 100px; 
   }
   .page-left, .page-right {
 	background: url('../images/Parchment.jpg') no-repeat center center;
-	width: 80%;
-	height: 400px;
+	width: 90%;
+	height: 300px;
 	border: 2px solid #000;
 	border-radius: 10px;
 	padding: 20px;
