@@ -226,10 +226,30 @@ body{
 
 
 /* Veronica */
-@media (min-width: 480px) {
-	#mute-button img {
-		width: 50%;
-		height: 50%;
-	}
-	
+/* Small phones */
+@media (max-width: 480px) {
+  /* Styles for very small screens */
+  #mute-button img {
+	width:85%;
+	height: 70px; 
+  }
+}
+
+/* Regular mobile phones */
+@media (max-width: 768px) {
+  /* Styles for most smartphones */
+	 #mute-button img {
+	width:80%;
+	height: 100px; 
+  }
+
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  /* Styles for tablets */
+   #mute-button img {
+	width:100px;
+	height: 150px; 
+  }
 }
