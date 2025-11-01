@@ -72,7 +72,7 @@ backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 dungeonMusic.loop = true;
 dungeonMusic.volume = 0.5;
-deathMusic.loop = true;
+deathMusic.loop = false;
 deathMusic.volume = 0.7;
 // state variables for player states
 let death = false;
