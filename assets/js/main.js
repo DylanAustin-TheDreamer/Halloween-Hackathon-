@@ -67,7 +67,7 @@ const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
 let message = document.getElementById('message');
 // declare and load audio files and volume settings
-// Custom input range styling
+// Custom input volume styling
 const inputRange = document.querySelector('.custom-input');
 
     inputRange.addEventListener('input', function () {
@@ -106,6 +106,7 @@ const buttonPlay = document.getElementById('start-button');
 // function for animating pumpkin - For getting a riddle wrong. Zoomes in, zooms out
 function animatePumpkin() {
     deathMusic = new Audio('assets/sounds/fail-trumpet.mp3');
+    deathMusic.volume = inputRange.value / 100;
     pumpkinImg.classList.remove('ghost');
     pumpkinImg.classList.add('ghost-visible');
     dungeon = false;
@@ -121,6 +122,7 @@ function animatePumpkin() {
 // function to activate ghost and change music
 function animateGhosts() {
     deathMusic = new Audio('assets/sounds/dead-sound.mp3');
+    deathMusic.volume = inputRange.value / 100;
     ghostImg.classList.remove('ghost');
     ghostImg.classList.add('ghost-visible');
     fail = false;
