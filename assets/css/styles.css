@@ -113,7 +113,7 @@ body{
 	width: 100%;
 }
 #start-button {
-	background-color: none;
+	background-color: rgb(0,0,0);
 	border: none;
 
 	padding: 10px;
