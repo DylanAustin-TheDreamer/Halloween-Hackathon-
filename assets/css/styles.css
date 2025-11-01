@@ -131,7 +131,7 @@ body{
     border: 2px solid black;
     color: white;
     padding: 10px;
-    margin: 20px;
+    margin: 30px;
     font-size: 24px;
     cursor: pointer;
     position: fixed;
@@ -142,9 +142,9 @@ body{
 }
 
 #enter-library img {
-    width: 30px;  /* Adjust as needed */
-    height: 30px; /* Adjust as needed */
-    margin-right: 8px; /* Space between image and text */
+    width: 80px;  /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+
 }
 #my-title {
 	font-size: 48px;
