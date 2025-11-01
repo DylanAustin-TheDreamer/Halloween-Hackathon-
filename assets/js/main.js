@@ -50,6 +50,7 @@ let attemptsLeft = 3;
 let timer;
 let timeLeft = 30;
 
+
 const questionEl = document.getElementById("riddle-question");
 const optionsContainer = document.getElementById("options-container");
 const nextBtn = document.getElementById("next-btn");
@@ -57,8 +58,10 @@ const feedbackEl = document.getElementById("feedback");
 const attemptsLeftEl = document.getElementById("attempts-left");
 const timerEl = document.getElementById("timer");
 
+
+
 function startTimer() {
-  clearInterval(timer);
+  clearInterval(timer); 
   timeLeft = 30;
   timerEl.textContent = `Time left: ${timeLeft} seconds`;
 
@@ -100,12 +103,14 @@ function loadRiddle() {
   riddle.options.forEach((option) => {
     const btn = document.createElement("button");
     btn.textContent = option;
+    btn.className = "btn btn-secondary w-50 mx-auto d-block mb-4";
     btn.addEventListener("click", () => checkAnswer(option, btn));
     optionsContainer.appendChild(btn);
   });
 
   startTimer();
 }
+
 
 // Check answer
 function checkAnswer(selectedOption, btn) {
@@ -118,6 +123,7 @@ function checkAnswer(selectedOption, btn) {
     feedbackEl.textContent = "Correct! Well done 👏.";
     disableOptions();
     nextBtn.style.display = "inline";
+
   } else {
     attemptsLeft--;
     attemptsLeftEl.textContent = `Attempts left: ${attemptsLeft}`;
@@ -125,6 +131,7 @@ function checkAnswer(selectedOption, btn) {
 
     // Disable this wrong option to prevent reselecting
     btn.disabled = true;
+
 
     if (attemptsLeft === 0) {
       stopTimer();
@@ -156,54 +163,3 @@ nextBtn.addEventListener("click", nextRiddle);
 
 // Initialize
 loadRiddle();
-
-
-
-
-// Ok, so I created basic functionality for our riddle game,  with 4 answers, 3 attempts, timer 30s,  for now with a text when answer is correct or incorrect, but this will be replaced with candies, pumpkin.... we can start from here when HTML is ready, then add on, remove or change.
-
-// Examples of riddles:
-
-// {
-//     question: "What has keys but can't open locks?",
-//     answer: "keyboard",
-//     options: ["piano", "keyboard", "map", "clock"],
-//   },
-//   {
-//     question: "What has a face and two hands but no arms or legs?",
-//     answer: "clock",
-//     options: ["clock", "watch", "calendar", "mirror"],
-//   },
-//   {
-//     question: "What has one eye but can't see?",
-//     answer: "needle",
-//     options: ["needle", "storm", "cyclops", "button"],
-//   },
-//   {
-//     question:
-//       "What runs but never walks, has a mouth but never talks, has a head but never weeps, and has a bed but never sleeps?",
-//     answer: "river", options: ["river", "car", "dog", "clock"]
-//   },
-//   { question: "What breaks as soon as you say its name?", answer: "silence", options: ["silence", "glass", "egg", "secret"] },
-//   { question: "What goes up but never comes down?", answer: "age", options: ["age", "balloon", "temperature", "kite"] },
-//   {
-//     question: "What can travel around the world while staying in a corner?",
-//     answer: "stamp", options: ["stamp", "airplane", "postcard", "clock"]
-//   },
-//   { question: "What has to be broken before you can use it?", answer: "egg", options: ["egg", "glass", "door", "phone"] },
-//   {
-//     question:
-//       "I am tall when I am young, and I am short when I am old. What am I?",
-//     answer: "candle", options: ["candle", "tree", "shadow", "pencil"]
-//   },
-//   {
-//     question: "What is full of holes but still holds water?",
-//     answer: "sponge", options: ["sponge", "bucket", "net", "bottle"]
-//   },
-//   {
-//     question:
-//       "I speak without a mouth and hear without ears. I have nobody, but I come alive with the wind. What am I?",
-//     answer: "echo", options: ["echo", "wind", "shadow", "whistle"]
-//   },
-//   { question: "What can you catch but not throw?", answer: "cold", options: ["cold", "ball", "fish", "frisbee"] },
-//   { question: "What comes down but never goes up?", answer: "Rain", options: ["rain", "balloon", "kite", "leaf"] },
