@@ -1,0 +1,128 @@
+/* Layout: keep footer at bottom without extending the page */
+html, body {
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh; /* ensure footer can sit at bottom */
+	padding-top: 56px; /* space for fixed navbar */
+}
+
+main {
+	flex: 1 0 auto; /* allow main to grow and push footer to bottom */
+}
+
+footer {
+	margin-top: 0 !important; /* override any Bootstrap spacing so footer doesn't push page taller */
+}
+
+/* Small accessibility tweak: make choice buttons easy to tap */
+.choices-btn {
+	padding: 0.75rem 1rem;
+	font-size: 1.05rem;
+}
+
+/* Halloween theme: color variables and component overrides */
+:root {
+	--h-bg-900: #08020a;   /* near black */
+	--h-bg-800: #12051a;   /* very dark purple */
+	--h-purple: #4a148c;   /* deep purple */
+	--h-orange: #ff6b00;   /* pumpkin orange */
+	--h-yellow: #ffc857;   /* warm yellow */
+	--h-green: #7cff6b;    /* bright spooky green for accents */
+	--h-text: #fff7e6;     /* warm off-white */
+	--h-muted: #c9b29a;    /* parchment-like muted */
+}
+
+/* Page background and text */
+body {
+	background: linear-gradient(180deg, var(--h-bg-800) 0%, var(--h-bg-900) 100%);
+	color: var(--h-text);
+}
+
+/* Header (hero) */
+header {
+	background: linear-gradient(180deg, rgba(74,20,140,0.9) 0%, rgba(27,8,58,0.95) 100%) !important;
+	color: var(--h-text);
+}
+
+/* Navbar overrides */
+.navbar.bg-primary, .navbar {
+	background: linear-gradient(90deg, rgba(74,20,140,0.95), rgba(40,10,90,0.95)) !important;
+}
+.navbar .navbar-brand,
+.navbar .nav-link {
+	color: var(--h-text) !important;
+}
+.navbar .nav-link.active {
+	color: var(--h-orange) !important;
+	font-weight: 700;
+}
+
+/* Cards */
+.card {
+	background-color: rgba(255,255,255,0.03);
+	border: 1px solid rgba(255,255,255,0.04);
+	color: var(--h-text);
+}
+
+/* Buttons */
+.btn-primary {
+	background-color: var(--h-orange) !important;
+	border-color: rgba(0,0,0,0.15) !important;
+	color: #111 !important;
+}
+.btn-outline-light {
+	border-color: rgba(255,255,255,0.65) !important;
+	color: var(--h-text) !important;
+}
+.btn-light {
+	background-color: var(--h-yellow) !important;
+	color: #111 !important;
+}
+
+/* Choice buttons (use helper class in JS output) */
+.choices-btn {
+	background: rgba(255,107,0,0.95);
+	color: #12020a;
+	border: none;
+	border-radius: 0.5rem;
+}
+
+/* Badges */
+.badge.bg-success {
+	background-color: var(--h-green) !important;
+	color: #062006 !important;
+}
+
+/* Links and small text */
+a { color: var(--h-orange); }
+a:hover { color: var(--h-yellow); }
+
+.spooky { color: var(--h-orange) !important; }
+
+/* Footer styling */
+footer {
+	background: linear-gradient(90deg, rgba(10,6,20,0.98), rgba(30,10,40,0.98));
+	color: var(--h-text);
+}
+
+/* Reduce the footer padding slightly so it doesn't feel too tall */
+footer .container { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+
+/* Improve contrast for form controls */
+.form-control {
+	background-color: rgba(255,255,255,0.02);
+	color: var(--h-text);
+	border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Make headings pop a little */
+h1, h2, h3, h4 {
+	color: var(--h-text);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
+
+
