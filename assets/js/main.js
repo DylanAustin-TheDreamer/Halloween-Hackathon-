@@ -64,20 +64,25 @@ const ghostImg = document.getElementById('ghost');
 const button = document.getElementById('animate-ghost');
 const buttonPumpkin = document.getElementById('animate-pumpkin');
 const pumpkinImg = document.getElementById('pumpkin');
+const cupImg = document.getElementById('cup');
 // declare and load audio files and volume settings
 let backgroundMusic = new Audio('assets/sounds/main-theme.mp3');
 let dungeonMusic = new Audio('assets/sounds/dungeon-sound.mp3');
 let deathMusic = new Audio('assets/sounds/dead-sound.mp3');
+let successMusic = new Audio('assets/sounds/trumpets.mp3');
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 dungeonMusic.loop = true;
 dungeonMusic.volume = 0.5;
 deathMusic.loop = false;
 deathMusic.volume = 0.7;
+successMusic.loop = false;
+successMusic.volume = 0.4;
 const mute = document.getElementById('mute-button');
 // state variables for player states
 let death = false;
 let dungeon = false;
+let complete = false;
 // for starting game
 const buttonPlay = document.getElementById('start-button');
 
@@ -99,6 +104,15 @@ function animateGhosts() {
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
 }
+function animateCup(){
+    cupImg.classList.remove('ghost');
+    cupImg.classList.add('ghost-visible');
+    complete = true;
+    stopAllMusic();
+    console.log('Cup animation triggered: playing successMusic');
+    checkStates();
+    confetti();
+}
 
 // stop all music function
 function stopAllMusic() {
@@ -117,6 +131,10 @@ function checkStates() {
         dungeonMusic.currentTime = 0;
         dungeonMusic.play();
         console.log('Dungeon state: dungeonMusic playing');
+    } else if (complete) {
+        successMusic.currentTime = 0;
+        successMusic.play();
+        console.log('Complete state: successMusic playing');
     }
 }
 
@@ -189,6 +207,9 @@ function checkAnswer(selectedOption, btn) {
     feedbackEl.textContent = "Correct! Well done 👏.";
     disableOptions();
     nextBtn.style.display = "inline";
+    // Trigger cup animation and music change
+    animateCup();
+    modal.classList.remove('fade-out');
 
   } else {
     attemptsLeft--;
@@ -241,19 +262,36 @@ function startGame() {
 }
 
 mute.addEventListener('click', () => {
-    if (backgroundMusic.volume > 0 || dungeonMusic.volume > 0 || deathMusic.volume > 0) {
+    if (backgroundMusic.volume > 0 || dungeonMusic.volume > 0 || deathMusic.volume > 0 || successMusic.volume > 0) {
         backgroundMusic.volume = 0;
         dungeonMusic.volume = 0;
         deathMusic.volume = 0;
+        successMusic.volume = 0;
     } else {
         backgroundMusic.volume = 0.5;
         dungeonMusic.volume = 0.5;
         deathMusic.volume = 0.7;
+        successMusic.volume = 0.4;
         if (death) {
           deathMusic.play();
+        } else if (complete){
+          successMusic.play();
         }
         else{
           dungeonMusic.play();
         }
     }
+});
+
+
+const canvases = document.getElementsByTagName('canvas');
+for (let canvas of canvases) {
+  canvas.style.zIndex = '1000';
+}
+
+confetti({
+  particleCount: 500,
+  spread: 120,
+  origin: { y: 0.6 },
+  colors: ['#ff430aff', '#ff7b47ff', '#ffb570ff', '#ff1e00ff', '#ff0040ff']
 });
