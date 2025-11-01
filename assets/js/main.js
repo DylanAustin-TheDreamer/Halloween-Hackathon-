@@ -84,6 +84,10 @@ const buttonPlay = document.getElementById('start-button');
 function animatePumpkin() {
     pumpkinImg.classList.remove('ghost');
     pumpkinImg.classList.add('ghost-visible');
+    death = true;
+    stopAllMusic();
+    console.log('Ghost button clicked: playing deathMusic');
+    checkStates();
 }
 // function to activate ghost and change music
 function animateGhosts() {
@@ -129,12 +133,15 @@ function startTimer() {
 
     if (timeLeft <= 0) {
       clearInterval(timer);
+      disableOptions();
       feedbackEl.textContent =
         "Time is up! The correct answer was: " +
         riddles[currentRiddleIndex].answer;
-      answerInput.disabled = true;
-      submitBtn.style.display = "none";
       nextBtn.style.display = "inline";
+      
+      // Trigger pumpkin animation and music change
+      animatePumpkin();
+      modal.classList.remove('fade-out');
     }
   }, 1000);
 }
