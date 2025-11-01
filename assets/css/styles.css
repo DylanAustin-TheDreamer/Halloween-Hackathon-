@@ -234,15 +234,7 @@ body{
 	height: 70px; 
   }
 
-  .page-left, .page-right {
-	background: url('../images/Parchment.jpg') no-repeat center center;
-	width: 95%;
-	height: 150px;
-	border: 2px solid #000;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-}
+
 }
 
 /* Regular mobile phones */
@@ -252,15 +244,6 @@ body{
 	width:90%;
 	height: 100px; 
   }
-  .page-left, .page-right {
-	background: url('../images/Parchment.jpg') no-repeat center center;
-	width: 90%;
-	height: 300px;
-	border: 2px solid #000;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-}
 
 }
 
@@ -271,14 +254,6 @@ body{
 	width:100px;
 	height: 150px; 
   }
+  
 
-  .page-left, .page-right {
-	background: url('../images/Parchment.jpg') no-repeat center center;
-	width: 600px;
-	height: 800px;
-	border: 2px solid #000;
-	border-radius: 10px;
-	padding: 20px;
-	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-}
 }
