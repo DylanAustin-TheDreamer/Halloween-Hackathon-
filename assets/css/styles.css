@@ -113,9 +113,9 @@ body{
 	width: 100%;
 }
 #start-button {
-	background-color: rgb(75, 29, 29);
-	border: 2px solid black;
-	color: white;
+	background-color: none;
+	border: none;
+
 	padding: 10px;
 	margin: 20px;
 	font-size: 24px;
