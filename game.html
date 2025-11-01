@@ -13,8 +13,16 @@
 	
 	<body style="background-color: #4e4e4e; background-image: url('assets/images/cellar.png'); background-repeat: no-repeat; background-size: cover;">
 		<div id="modal"></div>
-		<button id="start-button">Press To Begin</button>
-		<button id="mute-button">Mute/Unmute</button>
+		<button id="start-button">
+			<img src="assets\images\Press-to-play.png" alt="Press to begin">
+		</button>
+		<button id="mute-button">
+			<img src="assets\images\sound.png" alt="mute/unmute">
+		</button>
+		<div style="position: fixed; width: fit-content; height: 110px ; top: 75px; right: 100px; z-index: 1001;">
+        	<input class="custom-input" type="range" min="0" max="100" step="any" value="15">
+      	</div>
+		<h1 id="message" style="display: none;"></h1>
 
 		<div style="position: fixed ; z-index: 999; pointer-events: none;">
 			<img src="assets/images/ghost.png" alt="Image of a ghost" class="ghost" id="ghost" style="width: 450px; height: auto;">
@@ -29,7 +37,7 @@
 		<div class="book container d-flex justify-content-center align-items-center gap-1 row ">
             <!-- Left side of grid -->
 			<div style="flex: 0">
-                <div class="page-left container-fluid" style="width: 100%; text-align: center; padding-top: 60px;">
+                <div class="page-left container" style="width: 100%; text-align: center; padding-top: 60px;">
 					<div style="width: 570px;"></div>
                     <h1 id="question">Riddle Me This!</h1>
 					<br>
@@ -39,8 +47,8 @@
             </div>
 
             <!-- Right side of grid -->
-            <div style="flex: 1" class="container-fluid;">
-                <div class="page-right container-fluid;" style= "text-align: center; padding-top: 60px;">
+            <div style="flex: 1" class="container;">
+                <div class="page-right container;" style= "width: 100%; text-align: center; padding-top: 60px;">
                     <h1 id="answer">Select Answer</h1>
 					<div id="options-container" style="margin-top: 60px;"></div>
 					<p id="feedback"></p>

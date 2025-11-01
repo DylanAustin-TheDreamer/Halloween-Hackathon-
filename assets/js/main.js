@@ -65,22 +65,39 @@ const button = document.getElementById('animate-ghost');
 const buttonPumpkin = document.getElementById('animate-pumpkin');
 const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
+let message = document.getElementById('message');
 // declare and load audio files and volume settings
+// Custom input volume styling
+const inputRange = document.querySelector('.custom-input');
+
+    inputRange.addEventListener('input', function () {
+    const progress = (inputRange.value - inputRange.min) / (inputRange.max - inputRange.min) * 100;
+    inputRange.style.background = `linear-gradient(...)`;
+    // Update all audio volumes
+    const newVolume = inputRange.value / 100;
+    backgroundMusic.volume = newVolume;
+    dungeonMusic.volume = newVolume;
+    deathMusic.volume = newVolume;
+    successMusic.volume = newVolume;
+});
+// ---------------------------
 let backgroundMusic = new Audio('assets/sounds/main-theme.mp3');
 let dungeonMusic = new Audio('assets/sounds/dungeon-sound.mp3');
 let deathMusic = new Audio('assets/sounds/dead-sound.mp3');
 let successMusic = new Audio('assets/sounds/trumpets.mp3');
 backgroundMusic.loop = true;
-backgroundMusic.volume = 0.5;
+backgroundMusic.volume = inputRange.value / 100;
 dungeonMusic.loop = true;
-dungeonMusic.volume = 0.5;
+dungeonMusic.volume = inputRange.value / 100;
 deathMusic.loop = false;
-deathMusic.volume = 0.7;
+deathMusic.volume = inputRange.value / 100;
 successMusic.loop = false;
-successMusic.volume = 0.4;
+successMusic.volume = inputRange.value / 100;
 const mute = document.getElementById('mute-button');
+
 // state variables for player states
 let death = false;
+let fail = false;
 let dungeon = false;
 let complete = false;
 // for starting game
@@ -88,30 +105,50 @@ const buttonPlay = document.getElementById('start-button');
 
 // function for animating pumpkin - For getting a riddle wrong. Zoomes in, zooms out
 function animatePumpkin() {
+    deathMusic = new Audio('assets/sounds/fail-trumpet.mp3');
+    deathMusic.volume = inputRange.value / 100;
     pumpkinImg.classList.remove('ghost');
     pumpkinImg.classList.add('ghost-visible');
-    death = true;
+    dungeon = false;
+    death = false;
+    fail = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+    message.style.display = "block";
+    message.innerText = "Oh no! You ran out of time!";
+    returnToGame();
 }
 // function to activate ghost and change music
 function animateGhosts() {
+    deathMusic = new Audio('assets/sounds/dead-sound.mp3');
+    deathMusic.volume = inputRange.value / 100;
     ghostImg.classList.remove('ghost');
     ghostImg.classList.add('ghost-visible');
+    fail = false;
+    dungeon = false;
     death = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+    message.style.display = "block";
+    message.innerText = "Oh no! You got it wrong!";
+    returnToGame();
 }
 function animateCup(){
     cupImg.classList.remove('ghost');
     cupImg.classList.add('ghost-visible');
+    dungeon = false;
+    death = false;
+    fail = false;
     complete = true;
     stopAllMusic();
     console.log('Cup animation triggered: playing successMusic');
     checkStates();
     confetti();
+    message.style.display = "block";
+    message.innerText = "Congratulations! You solved the riddle!";
+    returnToGame();
 }
 
 // stop all music function
@@ -119,6 +156,7 @@ function stopAllMusic() {
     backgroundMusic.pause();
     dungeonMusic.pause();
     deathMusic.pause();
+    successMusic.pause();
     console.log('All music paused');
 }
 // here we check our state after stop all music function - hand in hand
@@ -135,6 +173,10 @@ function checkStates() {
         successMusic.currentTime = 0;
         successMusic.play();
         console.log('Complete state: successMusic playing');
+    } else if (fail) {
+        deathMusic.currentTime = 0;
+        deathMusic.play();
+        console.log('Fail state: deathMusic playing');
     }
 }
 
@@ -257,7 +299,7 @@ function startGame() {
     buttonPlay.style.display = 'none';
     dungeonMusic.currentTime = 0;
     dungeonMusic.play();
-    document.getElementById('modal').classList.add('fade-out');
+    modal.classList.add('fade-out');
     loadRiddle();
 }
 
@@ -268,10 +310,10 @@ mute.addEventListener('click', () => {
         deathMusic.volume = 0;
         successMusic.volume = 0;
     } else {
-        backgroundMusic.volume = 0.5;
-        dungeonMusic.volume = 0.5;
-        deathMusic.volume = 0.7;
-        successMusic.volume = 0.4;
+        backgroundMusic.volume = inputRange.value / 100;
+        dungeonMusic.volume = inputRange.value / 100;
+        deathMusic.volume = inputRange.value / 100;
+        successMusic.volume = inputRange.value / 100;
         if (death) {
           deathMusic.play();
         } else if (complete){
@@ -295,3 +337,53 @@ confetti({
   origin: { y: 0.6 },
   colors: ['#ff430aff', '#ff7b47ff', '#ffb570ff', '#ff1e00ff', '#ff0040ff']
 });
+
+
+// Here is for dealing with after in game animation states.
+function returnToGame() {
+  if(death){
+  deathMusic.addEventListener('timeupdate', function() {
+    if (deathMusic.currentTime >= deathMusic.duration / 2.5){
+      message.innerText = "";
+      message.style.display = "none";
+    death = false;
+    complete = false;
+    ghostImg.classList.remove('ghost-visible');
+    ghostImg.classList.add('ghost');
+    stopAllMusic();
+    dungeon = true;
+    checkStates();
+    modal.classList.add('fade-out');
+    nextRiddle();
+    }
+  });
+    } else if(complete){
+  successMusic.addEventListener('ended', function() {
+      message.innerText = "";
+      message.style.display = "none";
+    death = false;
+    complete = false;
+    cupImg.classList.remove('ghost-visible');
+    cupImg.classList.add('ghost');
+    stopAllMusic();
+    dungeon = true;
+    checkStates();
+    modal.classList.add('fade-out');
+    nextRiddle();
+  });
+  } else if(fail){
+  deathMusic.addEventListener('ended', function() {
+      message.innerText = "";
+      message.style.display = "none";
+      death = false;
+      complete = false;
+      pumpkinImg.classList.remove('ghost-visible');
+      pumpkinImg.classList.add('ghost');
+      stopAllMusic();
+      dungeon = true;
+      checkStates();
+      modal.classList.add('fade-out');
+      nextRiddle();
+  });
+  }
+}
