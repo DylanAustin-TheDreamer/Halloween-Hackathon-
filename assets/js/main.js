@@ -74,6 +74,7 @@ dungeonMusic.loop = true;
 dungeonMusic.volume = 0.5;
 deathMusic.loop = false;
 deathMusic.volume = 0.7;
+const mute = document.getElementById('mute-button');
 // state variables for player states
 let death = false;
 let dungeon = false;
@@ -238,3 +239,21 @@ function startGame() {
     document.getElementById('modal').classList.add('fade-out');
     loadRiddle();
 }
+
+mute.addEventListener('click', () => {
+    if (backgroundMusic.volume > 0 || dungeonMusic.volume > 0 || deathMusic.volume > 0) {
+        backgroundMusic.volume = 0;
+        dungeonMusic.volume = 0;
+        deathMusic.volume = 0;
+    } else {
+        backgroundMusic.volume = 0.5;
+        dungeonMusic.volume = 0.5;
+        deathMusic.volume = 0.7;
+        if (death) {
+          deathMusic.play();
+        }
+        else{
+          dungeonMusic.play();
+        }
+    }
+});
