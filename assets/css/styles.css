@@ -226,3 +226,10 @@ body{
 
 
 /* Veronica */
+@media (min-width: 480px) {
+	#mute-button img {
+		width: 50%;
+		height: 50%;
+	}
+	
+}
