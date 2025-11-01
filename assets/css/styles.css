@@ -127,6 +127,7 @@ body{
 	align-items: center;
 }
 #enter-library {
+	background: url(../images/Book-for-press.png);
 	background-color: rgb(75, 29, 29);
 	border: 2px solid black;
 	color: white;
