@@ -32,11 +32,8 @@ newDiv.id = 'my-title';
 buttonPlay.addEventListener('click', startGame);
 function startGame() {
     buttonPlay.style.display = 'none';
-    backgroundimg.appendChild(newDiv);
-    backgroundimg.id = 'scene';
     backgroundMusic.currentTime = 0;
     backgroundMusic.play();
-    buttonWizard.style.display = 'inline-block';
     document.getElementById('modal').classList.add('fade-out');
 }
 

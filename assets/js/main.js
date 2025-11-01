@@ -50,7 +50,7 @@ let attemptsLeft = 3;
 let timer;
 let timeLeft = 30;
 
-
+// Magda's variables for riddle elements
 const questionEl = document.getElementById("riddle-question");
 const optionsContainer = document.getElementById("options-container");
 const nextBtn = document.getElementById("next-btn");
@@ -58,7 +58,65 @@ const feedbackEl = document.getElementById("feedback");
 const attemptsLeftEl = document.getElementById("attempts-left");
 const timerEl = document.getElementById("timer");
 
+// Dylan's variables for buttons and images
+const modal = document.getElementById('modal');
+const ghostImg = document.getElementById('ghost');
+const button = document.getElementById('animate-ghost');
+const buttonPumpkin = document.getElementById('animate-pumpkin');
+const pumpkinImg = document.getElementById('pumpkin');
+// declare and load audio files and volume settings
+let backgroundMusic = new Audio('assets/sounds/main-theme.mp3');
+let dungeonMusic = new Audio('assets/sounds/dungeon-sound.mp3');
+let deathMusic = new Audio('assets/sounds/dead-sound.mp3');
+backgroundMusic.loop = true;
+backgroundMusic.volume = 0.5;
+dungeonMusic.loop = true;
+dungeonMusic.volume = 0.5;
+deathMusic.loop = true;
+deathMusic.volume = 0.7;
+// state variables for player states
+let death = false;
+let dungeon = false;
+// for starting game
+const buttonPlay = document.getElementById('start-button');
 
+// function for animating pumpkin - For getting a riddle wrong. Zoomes in, zooms out
+function animatePumpkin() {
+    pumpkinImg.classList.remove('ghost');
+    pumpkinImg.classList.add('ghost-visible');
+}
+// function to activate ghost and change music
+function animateGhosts() {
+    ghostImg.classList.remove('ghost');
+    ghostImg.classList.add('ghost-visible');
+    death = true;
+    stopAllMusic();
+    console.log('Ghost button clicked: playing deathMusic');
+    checkStates();
+}
+
+// stop all music function
+function stopAllMusic() {
+    backgroundMusic.pause();
+    dungeonMusic.pause();
+    deathMusic.pause();
+    console.log('All music paused');
+}
+// here we check our state after stop all music function - hand in hand
+function checkStates() {
+    if (death) {
+        deathMusic.currentTime = 0;
+        deathMusic.play();
+        console.log('Death state: deathMusic playing');
+    } else if (dungeon) {
+        dungeonMusic.currentTime = 0;
+        dungeonMusic.play();
+        console.log('Dungeon state: dungeonMusic playing');
+    }
+}
+
+// Timer functions - Magda's part
+// below everything else for beginning game states and changing variables
 
 function startTimer() {
   clearInterval(timer); 
@@ -137,7 +195,10 @@ function checkAnswer(selectedOption, btn) {
       stopTimer();
       feedbackEl.textContent = `No attempts left! The correct answer was: ${riddle.answer}`;
       disableOptions();
-      nextBtn.style.display = "inline";
+      nextBtn.style.display = "none";
+      // Trigger ghost animation and music change
+      animateGhosts();
+      modal.classList.remove('fade-out');
     }
   }
 }
@@ -162,4 +223,11 @@ function nextRiddle() {
 nextBtn.addEventListener("click", nextRiddle);
 
 // Initialize
-loadRiddle();
+buttonPlay.addEventListener('click', startGame);
+function startGame() {
+    buttonPlay.style.display = 'none';
+    dungeonMusic.currentTime = 0;
+    dungeonMusic.play();
+    document.getElementById('modal').classList.add('fade-out');
+    loadRiddle();
+}

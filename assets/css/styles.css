@@ -145,11 +145,12 @@ body{
 	justify-content: center;
 	align-items: center;  
 	z-index: 998;
-	transition: opacity 7s ease-in-out;
+	transition: opacity 3s ease-in-out;
 	opacity: 1;
 }
 #modal.fade-out {
 	opacity: 0;
+	transition: opacity 7s ease-in-out;
 	pointer-events: none;
 }
 
