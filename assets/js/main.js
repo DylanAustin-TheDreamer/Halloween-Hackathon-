@@ -65,6 +65,7 @@ const button = document.getElementById('animate-ghost');
 const buttonPumpkin = document.getElementById('animate-pumpkin');
 const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
+let message = document.getElementById('message');
 // declare and load audio files and volume settings
 let backgroundMusic = new Audio('assets/sounds/main-theme.mp3');
 let dungeonMusic = new Audio('assets/sounds/dungeon-sound.mp3');
@@ -90,28 +91,41 @@ const buttonPlay = document.getElementById('start-button');
 function animatePumpkin() {
     pumpkinImg.classList.remove('ghost');
     pumpkinImg.classList.add('ghost-visible');
+    dungeon = false;
     death = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+    message.style.display = "block";
+    message.innerText = "Oh no! You ran out of time!";
+    returnToGame();
 }
 // function to activate ghost and change music
 function animateGhosts() {
     ghostImg.classList.remove('ghost');
     ghostImg.classList.add('ghost-visible');
+    dungeon = false;
     death = true;
     stopAllMusic();
     console.log('Ghost button clicked: playing deathMusic');
     checkStates();
+    message.style.display = "block";
+    message.innerText = "Oh no! You got it wrong!";
+    returnToGame();
 }
 function animateCup(){
     cupImg.classList.remove('ghost');
     cupImg.classList.add('ghost-visible');
+    dungeon = false;
+    death = false;
     complete = true;
     stopAllMusic();
     console.log('Cup animation triggered: playing successMusic');
     checkStates();
     confetti();
+    message.style.display = "block";
+    message.innerText = "Congratulations! You solved the riddle!";
+    returnToGame();
 }
 
 // stop all music function
@@ -119,6 +133,7 @@ function stopAllMusic() {
     backgroundMusic.pause();
     dungeonMusic.pause();
     deathMusic.pause();
+    successMusic.pause();
     console.log('All music paused');
 }
 // here we check our state after stop all music function - hand in hand
@@ -257,7 +272,7 @@ function startGame() {
     buttonPlay.style.display = 'none';
     dungeonMusic.currentTime = 0;
     dungeonMusic.play();
-    document.getElementById('modal').classList.add('fade-out');
+    modal.classList.add('fade-out');
     loadRiddle();
 }
 
@@ -295,3 +310,41 @@ confetti({
   origin: { y: 0.6 },
   colors: ['#ff430aff', '#ff7b47ff', '#ffb570ff', '#ff1e00ff', '#ff0040ff']
 });
+
+
+// Here is for dealing with after in game animation states.
+function returnToGame() {
+  if(death){
+  deathMusic.addEventListener('timeupdate', function() {
+    if (deathMusic.currentTime >= deathMusic.duration / 2.5){
+      message.innerText = "";
+      message.style.display = "none";
+    death = false;
+    complete = false;
+    ghostImg.classList.remove('ghost-visible');
+    ghostImg.classList.add('ghost');
+    pumpkinImg.classList.remove('ghost-visible');
+    pumpkinImg.classList.add('ghost');
+    stopAllMusic();
+    dungeon = true;
+    checkStates();
+    modal.classList.add('fade-out');
+    nextRiddle();
+    }
+  });
+    } else {
+  successMusic.addEventListener('ended', function() {
+      message.innerText = "";
+      message.style.display = "none";
+    death = false;
+    complete = false;
+    cupImg.classList.remove('ghost-visible');
+    cupImg.classList.add('ghost');
+    stopAllMusic();
+    dungeon = true;
+    checkStates();
+    modal.classList.add('fade-out');
+    nextRiddle();
+  });
+  }
+}
