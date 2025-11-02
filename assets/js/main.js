@@ -59,13 +59,19 @@ const attemptsLeftEl = document.getElementById("attempts-left");
 const timerEl = document.getElementById("timer");
 
 // Dylan's variables for buttons and images
-const modal = document.getElementById('modal');
+const modal = document.getElementById('modalHomeMade');
 const ghostImg = document.getElementById('ghost');
 const button = document.getElementById('animate-ghost');
 const buttonPumpkin = document.getElementById('animate-pumpkin');
 const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
+const howtoPlay = document.getElementById('how-to');
 let message = document.getElementById('message');
+
+howtoPlay.addEventListener('click', () => {
+    howtoPlay.style.backgroundColor = 'black';
+    howtoPlay.innerText = '';
+});
 // declare and load audio files and volume settings
 // Custom input volume styling
 const inputRange = document.querySelector('.custom-input');

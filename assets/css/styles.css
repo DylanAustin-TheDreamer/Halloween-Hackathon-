@@ -154,7 +154,7 @@ body{
 	font-family: "Creepster", cursive;
 }
 
-#modal {
+#modalHomeMade {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -168,7 +168,7 @@ body{
 	transition: opacity 3s ease-in-out;
 	opacity: 1;
 }
-#modal.fade-out {
+#modalHomeMade.fade-out {
 	opacity: 0;
 	transition: opacity 7s ease-in-out;
 	pointer-events: none;
