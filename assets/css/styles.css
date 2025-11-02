@@ -183,7 +183,9 @@ body{
 .page-left, .page-right {
 	background: url('../images/Parchment.jpg') no-repeat center center;
 	width: 600px;
-	height: 800px;
+	/* allow pages to grow/shrink with content; keep a sensible minimum on desktop */
+	min-height: 800px;
+	height: auto;
 	border: 2px solid #000;
 	border-radius: 10px;
 	padding: 20px;
@@ -241,6 +243,7 @@ body{
               border-radius: 5px;
 
               writing-mode: vertical-lr;
+			  appearance: slider-vertical;
               -webkit-appearance: slider-vertical;
           }
 
@@ -307,4 +310,38 @@ body{
   }
   
 
+}
+
+
+
+/* ------------------------------------------------------------------------- */
+
+
+/* Habib */
+
+@media (max-width: 768px) {
+	/* On smaller screens let the book and pages size to their content
+	   and make sure both naming variants are handled (`left-page` and `page-left`). */
+	.book {
+		height: auto;
+		min-height: 100vh; /* keeps some vertical space but allows content flow */
+	}
+
+	.left-page,
+	.page-left {
+		height: auto !important;
+		min-height: 0 !important;
+		max-height: none !important;
+		width: 100% !important; /* use available width on small screens */
+		box-sizing: border-box;
+	}
+
+	.right-page,
+	.page-right {
+		height: auto !important;
+		min-height: 0 !important;
+		max-height: none !important;
+		width: 100% !important; /* use available width on small screens */
+		box-sizing: border-box;
+	}
 }
