@@ -280,6 +280,35 @@ body{
   font-family: 'Macondo', cursive;
 }
 
+/* Instructions */
+
+.instructions {
+  z-index: 1001;
+  top: 1px;
+  right: 450px;
+  padding: 12px 20px;
+  position: sticky;
+  background: linear-gradient(135deg, #903d05 70%, #f49223 100%);
+  border: 4px solid #b87333;
+  border-radius: 14px;
+  box-shadow: 0 0 20px #a0522dcc, 0 0 60px 2px #fff3 inset;
+  /* Macondo with a fallback*/
+  font-family: 'Macondo', cursive, sans-serif;
+  max-width: 90vw;
+  width: 360px;
+  min-width: 220px;
+  margin: 35px auto 0 auto;
+  text-align: center;
+}
+
+.instructions-content {
+  color: #ffe9c0;
+  text-shadow: 2px 2px 8px #7c492c, 1px 1px 0 #341c09;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 /* Transfered from main.css */
 /* Cards */
