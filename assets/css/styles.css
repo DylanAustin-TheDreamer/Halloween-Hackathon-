@@ -154,7 +154,7 @@ body{
 	font-family: "Creepster", cursive;
 }
 
-#modal {
+#modalHomeMade {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -164,11 +164,11 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;  
-	z-index: 998;
+	z-index: 100;
 	transition: opacity 3s ease-in-out;
 	opacity: 1;
 }
-#modal.fade-out {
+#modalHomeMade.fade-out {
 	opacity: 0;
 	transition: opacity 7s ease-in-out;
 	pointer-events: none;
@@ -206,7 +206,7 @@ body{
 	justify-content: center;
 	align-items: center;
 	top: 10px;
-	right: 100px;
+	right: 50px;
 }
 #mute-button img {
 	width: 100px;
@@ -244,7 +244,6 @@ body{
 
               writing-mode: vertical-lr;
 			  appearance: slider-vertical;
-              -webkit-appearance: slider-vertical;
           }
 
           .custom-input::-webkit-slider-thumb {
@@ -266,6 +265,9 @@ body{
           }
 /* ------------------------------------------------------------------------- */
 
+#hidden-content {
+	display: none;
+}
 /* Magda */
 
 .macondo-regular {
@@ -278,6 +280,71 @@ body{
   font-family: 'Macondo', cursive;
 }
 
+
+/* Transfered from main.css */
+/* Cards */
+.card {
+	background-color: rgba(255,255,255,0.03);
+	border: 1px solid rgba(255,255,255,0.04);
+	color: var(--h-text);
+}
+
+/* Buttons */
+.btn-primary {
+	background-color: var(--h-orange) !important;
+	border-color: rgba(0,0,0,0.15) !important;
+	color: #111 !important;
+}
+.btn-outline-light {
+	border-color: rgba(255,255,255,0.65) !important;
+	color: var(--h-text) !important;
+}
+.btn-light {
+	background-color: var(--h-yellow) !important;
+	color: #111 !important;
+}
+
+/* Choice buttons (use helper class in JS output) */
+.choices-btn {
+	background: rgba(255,107,0,0.95);
+	color: #12020a;
+	border: none;
+	border-radius: 0.5rem;
+}
+
+/* Badges */
+.badge.bg-success {
+	background-color: var(--h-green) !important;
+	color: #062006 !important;
+}
+
+/* Links and small text */
+a { color: var(--h-orange); }
+a:hover { color: var(--h-yellow); }
+
+.spooky { color: var(--h-orange) !important; }
+
+/* Footer styling */
+footer {
+	background: linear-gradient(90deg, rgba(10,6,20,0.98), rgba(30,10,40,0.98));
+	color: var(--h-text);
+}
+
+/* Reduce the footer padding slightly so it doesn't feel too tall */
+footer .container { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+
+/* Improve contrast for form controls */
+.form-control {
+	background-color: rgba(255,255,255,0.02);
+	color: var(--h-text);
+	border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Make headings pop a little */
+h1, h2, h3, h4 {
+	color: var(--h-text);
+	text-shadow: 0 1px 0 rgba(0,0,0,0.6);
+}
 
 
 /* Small phones */
@@ -297,8 +364,32 @@ body{
 	 #mute-button img {
 	width:90%;
 	height: 100px; 
+	position: fixed;
+	bottom: 0;
+	left: 0; 
+  }
+  #volume{
+	position: fixed;
+	bottom: 0;
+	right: 20px;
+	height: 100px;
+  }
+  #volume-label{
+	display: none;
+  }
+  .custom-input{
+	direction: rtl;
   }
 
+  #start-button > img {
+	width: 350px;
+  }
+}
+@media (min-width: 1024px) {
+  /* Styles for larger screens */
+   .custom-input{
+	transform: rotate(-90deg); width: 110px;
+  }
 }
 
 /* Tablets */
