@@ -297,7 +297,7 @@ nextBtn.addEventListener("click", nextRiddle);
 // Initialize
 buttonPlay.addEventListener('click', startGame);
 function startGame() {
-    howtoPlay.style.display = 'none';
+    howtoPlay.id = 'hidden-content';
     buttonPlay.style.display = 'none';
     dungeonMusic.currentTime = 0;
     dungeonMusic.play();
