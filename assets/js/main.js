@@ -3,12 +3,12 @@ const riddles = [
   {
     question: "What has keys but can't open locks?",
     answer: "keyboard",
-    options: ["piano", "keyboard", "map", "clock"],
+    options: ["safe", "keyboard", "map", "code"],
   },
   {
     question: "What has a face and two hands but no arms or legs?",
     answer: "clock",
-    options: ["clock", "watch", "calendar", "mirror"],
+    options: ["clock", "book", "calendar", "mirror"],
   },
   {
     question: "What has one eye but can't see?",
@@ -18,19 +18,19 @@ const riddles = [
   {
     question:
       "What runs but never walks, has a mouth but never talks, has a head but never weeps, and has a bed but never sleeps?",
-    answer: "river", options: ["river", "car", "dog", "clock"]
+    answer: "river", options: ["river", "car", "dog", "train"]
   },
-  { question: "What breaks as soon as you say its name?", answer: "silence", options: ["silence", "glass", "egg", "secret"] },
+  { question: "What breaks as soon as you say its name?", answer: "silence", options: ["silence", "promise", "bubble", "secret"] },
   { question: "What goes up but never comes down?", answer: "age", options: ["age", "balloon", "temperature", "kite"] },
   {
     question: "What can travel around the world while staying in a corner?",
-    answer: "stamp", options: ["stamp", "airplane", "postcard", "clock"]
+    answer: "stamp", options: ["stamp", "airplane", "postcard", "envelope"]
   },
   { question: "What has to be broken before you can use it?", answer: "egg", options: ["egg", "glass", "door", "phone"] },
   {
     question:
       "I am tall when I am young, and I am short when I am old. What am I?",
-    answer: "candle", options: ["candle", "tree", "shadow", "pencil"]
+    answer: "candle", options: ["candle", "tree", "stick", "pencil"]
   },
   {
     question: "What is full of holes but still holds water?",
@@ -39,10 +39,9 @@ const riddles = [
   {
     question:
       "I speak without a mouth and hear without ears. I have nobody, but I come alive with the wind. What am I?",
-    answer: "echo", options: ["echo", "wind", "shadow", "whistle"]
+    answer: "echo", options: ["echo", "whisper", "shadow", "whistle"]
   },
   { question: "What can you catch but not throw?", answer: "cold", options: ["cold", "ball", "fish", "frisbee"] },
-  { question: "What comes down but never goes up?", answer: "Rain", options: ["rain", "balloon", "kite", "leaf"] },
 ];
 
 let currentRiddleIndex = 0;
