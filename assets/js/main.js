@@ -67,10 +67,6 @@ const cupImg = document.getElementById('cup');
 const howtoPlay = document.getElementById('how-to');
 let message = document.getElementById('message');
 
-howtoPlay.addEventListener('click', () => {
-    howtoPlay.style.backgroundColor = 'black';
-    howtoPlay.innerText = '';
-});
 // declare and load audio files and volume settings
 // Custom input volume styling
 const inputRange = document.querySelector('.custom-input');
@@ -301,6 +297,7 @@ nextBtn.addEventListener("click", nextRiddle);
 // Initialize
 buttonPlay.addEventListener('click', startGame);
 function startGame() {
+    howtoPlay.style.display = 'none';
     buttonPlay.style.display = 'none';
     dungeonMusic.currentTime = 0;
     dungeonMusic.play();
@@ -333,7 +330,8 @@ mute.addEventListener('click', () => {
 
 const canvases = document.getElementsByTagName('canvas');
 for (let canvas of canvases) {
-  canvas.style.zIndex = '1000';
+  canvas.style.zIndex = '1001';
+  canvas.style.pointerEvents = 'none';
 }
 
 confetti({
@@ -392,3 +390,17 @@ function returnToGame() {
   });
   }
 }
+
+// force handle closing modal if bootstrap fails 
+document.querySelectorAll('.btn-close, [data-bs-dismiss="modal"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const modal = document.getElementById('how-to-play');
+    if (modal) {
+      modal.classList.remove('show');
+      modal.style.display = 'none';
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    }
+  });
+});

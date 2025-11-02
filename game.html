@@ -20,7 +20,7 @@
 			<img src="assets\images\sound.png" alt="mute/unmute">
 		</button>
 		<div style="position: fixed; width: fit-content; height: 110px ; top: 75px; right: 100px; z-index: 1001;">
-        	<input class="custom-input" type="range" min="0" max="100" step="any" value="15">
+        	<input class="custom-input" type="range" min="0" max="100" step="any" value="15" style="writing-mode: vertical-lr; direction: rtl">
       	</div>
 		<h1 id="message" style="display: none;"></h1>
 
@@ -34,7 +34,7 @@
 			<img src="assets/images/cup.png" alt="Image of a cup" class="ghost" id="cup" style="width: 800px; height: auto;">
 		</div>
 
-		<div class="d-grid gap-2 col-4 mx-auto" style="z-index: 1001;">
+	<div class="d-grid gap-2 col-4 mx-auto" style="z-index: 1001;">
           <!-- Button trigger modal -->
           <button
 		  	id="how-to"
@@ -47,43 +47,24 @@
             How to Play
           </button>
 
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="how-to-play"
-            tabindex="-1"
-            aria-labelledby="how-to-play"
-            aria-hidden="true"
-			style="z-index: 1002;"
-          >
-            <div class="modal-dialog" style="z-index: 1003;">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="modal-header">
-                    How to Play
-                  </h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-					style="z-index: 1005;"
-                  ></button>
-                </div>
-                <div class="modal-body" style="z-index: 1004;">
-					<p>Welcome to the Wizard's Riddles! In this game, you will be presented with a series of riddles to solve.</p>
+        <div class="modal" tabindex="-1" id="how-to-play" style="z-index: 1002;">
+  			<div class="modal-dialog">
+    			<div class="modal-content">
+      				<div class="modal-header">
+        				<h5 class="modal-title">How to Play</h5>
+        				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      				</div>
+      			<div class="modal-body">
+        			<p>Welcome to the Wizard's Riddles! In this game, you will be presented with a series of riddles to solve.</p>
 					<p>Choose the correct answer from the options provided. You have 3 attempts for each riddle, and a timer will count down from 30 seconds.</p>
 					<p>Good luck, and may your wits guide you!</p>
-				</div>
-                <div class="modal-footer" style="z-index: 1004;">
-                  <button type="button" class="btn" data-bs-dismiss="modal" style="z-index: 1005;">
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
+      			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      		</div>
+    	</div>
+  	</div>
+</div>
     </div>
 
 		<!-- Book container -->
@@ -113,8 +94,9 @@
             </div>
 
 		</div>
+
+		<script src="assets/js/main.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-		<script src="assets/js/main.js"></script>
 	</body>
 </html>
