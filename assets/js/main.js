@@ -3,7 +3,7 @@ const riddles = [
   {
     question: "What has keys but can't open locks?",
     answer: "keyboard",
-    options: ["safe", "keyboard", "map", "code"],
+    options: ["safe", "code", "keyboard", "map"],
   },
   {
     question: "What has a face and two hands but no arms or legs?",
@@ -13,24 +13,24 @@ const riddles = [
   {
     question: "What has one eye but can't see?",
     answer: "needle",
-    options: ["needle", "storm", "cyclops", "button"],
+    options: ["storm", "cyclops", "button", "needle"],
   },
   {
     question:
       "What runs but never walks, has a mouth but never talks, has a head but never weeps, and has a bed but never sleeps?",
-    answer: "river", options: ["river", "car", "dog", "train"]
+    answer: "river", options: ["dog","river", "car", "train"]
   },
-  { question: "What breaks as soon as you say its name?", answer: "silence", options: ["silence", "promise", "bubble", "secret"] },
+  { question: "What breaks as soon as you say its name?", answer: "silence", options: ["promise", "bubble", "silence", "secret"] },
   { question: "What goes up but never comes down?", answer: "age", options: ["age", "balloon", "temperature", "kite"] },
   {
     question: "What can travel around the world while staying in a corner?",
-    answer: "stamp", options: ["stamp", "airplane", "postcard", "envelope"]
+    answer: "stamp", options: ["airplane", "postcard", "envelope", "stamp"]
   },
-  { question: "What has to be broken before you can use it?", answer: "egg", options: ["egg", "glass", "door", "phone"] },
+  { question: "What has to be broken before you can use it?", answer: "egg", options: ["glass", "egg", "door", "phone"] },
   {
     question:
       "I am tall when I am young, and I am short when I am old. What am I?",
-    answer: "candle", options: ["candle", "tree", "stick", "pencil"]
+    answer: "candle", options: ["tree", "stick", "pencil", "candle",]
   },
   {
     question: "What is full of holes but still holds water?",
@@ -39,15 +39,20 @@ const riddles = [
   {
     question:
       "I speak without a mouth and hear without ears. I have nobody, but I come alive with the wind. What am I?",
-    answer: "echo", options: ["echo", "whisper", "shadow", "whistle"]
+    answer: "echo", options: ["whisper", "shadow", "echo", "whistle"]
   },
-  { question: "What can you catch but not throw?", answer: "cold", options: ["cold", "ball", "fish", "frisbee"] },
+  { question: "What can you catch but not throw?", answer: "cold", options: ["ball", "cold", "fish", "frisbee"] },
 ];
 
 let currentRiddleIndex = 0;
 let attemptsLeft = 3;
 let timer;
 let timeLeft = 30;
+//Game over after 2 total fails
+let failStreak = 0;
+const maxFailStreak = 2;
+let gameOver = false;
+
 
 // Magda's variables for riddle elements
 const questionEl = document.getElementById("riddle-question");
@@ -136,6 +141,8 @@ function animateGhosts() {
     message.innerText = "Oh no! You got it wrong!";
     returnToGame();
 }
+
+
 function animateCup(){
     cupImg.classList.remove('ghost');
     cupImg.classList.add('ghost-visible');
@@ -151,6 +158,7 @@ function animateCup(){
     message.innerText = "Congratulations! You solved the riddle!";
     returnToGame();
 }
+
 
 // stop all music function
 function stopAllMusic() {
@@ -250,9 +258,21 @@ function checkAnswer(selectedOption, btn) {
     feedbackEl.textContent = "Correct! Well done 👏.";
     disableOptions();
     nextBtn.style.display = "inline";
+    failStreak = 0; // reset fail streak on success - Magda added
     // Trigger cup animation and music change
     animateCup();
     modal.classList.remove('fade-out');
+
+    // game complete check
+
+    setTimeout(() => {
+        currentRiddleIndex++;
+        if (currentRiddleIndex >= riddles.length) {
+            gameCompleteScreen(); // stop game at the end
+        } else {
+            loadRiddle();
+        }
+    }, 1500); 
 
   } else {
     attemptsLeft--;
@@ -262,32 +282,40 @@ function checkAnswer(selectedOption, btn) {
     // Disable this wrong option to prevent reselecting
     btn.disabled = true;
 
-
+   // Game over after 2 total fails
     if (attemptsLeft === 0) {
       stopTimer();
       feedbackEl.textContent = `No attempts left! The correct answer was: ${riddle.answer}`;
       disableOptions();
       nextBtn.style.display = "none";
+      failStreak++; // 🔹 count as failed riddle
+
+      if (failStreak >= maxFailStreak) {
+        gameOverScreen();
+        return;
+      }
+
       // Trigger ghost animation and music change
       animateGhosts();
       modal.classList.remove('fade-out');
     }
+
   }
 }
+
 
 function disableOptions() {
   const buttons = optionsContainer.querySelectorAll("button");
   buttons.forEach((button) => (button.disabled = true));
 }
 
-nextBtn.addEventListener("click", () => {
-  currentRiddleIndex = (currentRiddleIndex + 1) % riddles.length;
-  loadRiddle();
-});
 
-// Next riddle
 function nextRiddle() {
   currentRiddleIndex = (currentRiddleIndex + 1) % riddles.length;
+  if (currentRiddleIndex >= riddles.length) {
+    gameCompleteScreen(); // 🎉 show ending
+    return;
+  }
   loadRiddle();
 }
 
@@ -304,6 +332,66 @@ function startGame() {
     modal.classList.add('fade-out');
     loadRiddle();
 }
+
+// Game over -Magda 
+
+function gameOverScreen() {
+  gameOver = true;
+  stopAllMusic();
+  overMusic = new Audio('assets/sounds/game-over.mp3');
+  overMusic.volume = inputRange.value / 100;
+  overMusic.play();
+
+  message.style.display = "block";
+  message.innerText = "💀 GAME OVER! You've run out of chances.";
+
+  // hide options and next button
+  document.body.classList.add("game-over");
+
+
+  // show a restart button
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "Restart Game";
+  restartBtn.className = "btn btn-primary mt-3";
+  restartBtn.addEventListener("click", restartGame);
+  optionsContainer.appendChild(restartBtn);
+}
+
+function restartGame() {
+  failStreak = 0;
+  currentRiddleIndex = 0;
+  message.style.display = "none";
+  nextBtn.style.display = "inline";
+  dungeon = true;
+  document.body.classList.remove("game-over");
+  checkStates();
+  loadRiddle();
+}
+
+// Game completed screen - Magda
+
+function gameCompleteScreen() {
+  stopAllMusic();
+  successMusic = new Audio('assets/sounds/trumpets.mp3');
+  successMusic.volume = inputRange.value / 100;
+  successMusic.play();
+
+  message.classList.add("show");
+  message.innerText = "🏆 Congratulations! You’ve solved all the riddles!";
+
+  optionsContainer.innerHTML = "";
+  nextBtn.style.display = "none";
+
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "Play Again";
+  restartBtn.className = "btn btn-primary mt-3";
+  restartBtn.addEventListener("click", restartGame);
+  optionsContainer.appendChild(restartBtn);
+  conffeti();
+}
+
+
+// Dylan
 
 mute.addEventListener('click', () => {
     if (backgroundMusic.volume > 0 || dungeonMusic.volume > 0 || deathMusic.volume > 0 || successMusic.volume > 0) {
@@ -357,7 +445,6 @@ function returnToGame() {
     dungeon = true;
     checkStates();
     modal.classList.add('fade-out');
-    nextRiddle();
     }
   });
     } else if(complete){
@@ -372,7 +459,6 @@ function returnToGame() {
     dungeon = true;
     checkStates();
     modal.classList.add('fade-out');
-    nextRiddle();
   });
   } else if(fail){
   deathMusic.addEventListener('ended', function() {
@@ -386,7 +472,6 @@ function returnToGame() {
       dungeon = true;
       checkStates();
       modal.classList.add('fade-out');
-      nextRiddle();
   });
   }
 }
