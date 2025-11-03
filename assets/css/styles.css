@@ -93,12 +93,14 @@ body {
 	opacity: 0;
 	transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 	transform: translateX(300px);
+	will-change: opacity;
 }
 
 .ghost-visible {
 	opacity: 1 !important;
 	transition: opacity 1s ease-in-out, transform 1s ease-in-out !important;
 	transform: translateX(0px) !important;
+	will-change: opacity !important;
 }
 
 #scene {
@@ -169,11 +171,13 @@ body {
 	z-index: 100;
 	transition: opacity 3s ease-in-out;
 	opacity: 1;
+	will-change: opacity;
 }
 #modalHomeMade.fade-out {
 	opacity: 0;
 	transition: opacity 7s ease-in-out;
 	pointer-events: none;
+	will-change: opacity;
 }
 
 /* For new sound settings on home page */

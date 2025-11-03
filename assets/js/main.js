@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function() {
 // Array of riddle objects
 const riddles = [
   {
@@ -242,6 +243,7 @@ function loadRiddle() {
     btn.textContent = option;
     btn.className = "btn btn-secondary w-50 mx-auto d-block mb-4";
     btn.addEventListener("click", () => checkAnswer(option, btn));
+    btn.addEventListener("touchstart", () => checkAnswer(option, btn));
     optionsContainer.appendChild(btn);
   });
 
@@ -323,9 +325,11 @@ function nextRiddle() {
 
 // Event listeners
 nextBtn.addEventListener("click", nextRiddle);
+nextBtn.addEventListener("touchstart", nextRiddle);
 
 // Initialize
 buttonPlay.addEventListener('click', startGame);
+buttonPlay.addEventListener('touchstart', startGame);
 function startGame() {
     howtoPlay.id = 'hidden-content';
     buttonPlay.style.display = 'none';
@@ -356,6 +360,7 @@ function gameOverScreen() {
   restartBtn.textContent = "Restart Game";
   restartBtn.className = "btn btn-primary mt-3";
   restartBtn.addEventListener("click", restartGame);
+  restartBtn.addEventListener("touchstart", restartGame);
   optionsContainer.appendChild(restartBtn);
   returnHomeBtn.style.display = "inline";
 }
@@ -397,7 +402,9 @@ function gameCompleteScreen() {
 
 // Dylan
 
-mute.addEventListener('click', () => {
+mute.addEventListener('click', handleMute);
+mute.addEventListener('touchstart', handleMute);
+  function handleMute() {
     if (backgroundMusic.volume > 0 || dungeonMusic.volume > 0 || deathMusic.volume > 0 || successMusic.volume > 0) {
         backgroundMusic.volume = 0;
         dungeonMusic.volume = 0;
@@ -417,7 +424,7 @@ mute.addEventListener('click', () => {
           dungeonMusic.play();
         }
     }
-});
+};
 
 
 const canvases = document.getElementsByTagName('canvas');
@@ -479,3 +486,5 @@ function returnToGame() {
   });
   }
 }
+
+});
