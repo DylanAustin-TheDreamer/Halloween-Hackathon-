@@ -242,7 +242,7 @@ body {
 #message {
   font-family: 'Macondo', cursive;	
   position: fixed;                /* Always stays in view */
-  top: 50%;                       /* Center vertically */
+  top: 25%;                       /* Center vertically */
   left: 50%;                      /* Center horizontally */
   transform: translate(-50%, -50%);
   text-align: center;
