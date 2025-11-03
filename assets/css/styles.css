@@ -326,7 +326,7 @@ body {
 .instructions {
   z-index: 1001;
   top: 1px;
-  right: 450px;
+  right: 5vw;
   padding: 12px 20px;
   position: sticky;
   background: linear-gradient(135deg, #903d05 70%, #f49223 100%);
