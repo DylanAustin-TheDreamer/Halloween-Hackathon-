@@ -71,6 +71,7 @@ const pumpkinImg = document.getElementById('pumpkin');
 const cupImg = document.getElementById('cup');
 const howtoPlay = document.getElementById('how-to');
 let message = document.getElementById('message');
+const returnHomeBtn = document.getElementById('return-home');
 
 // declare and load audio files and volume settings
 // Custom input volume styling
@@ -356,6 +357,7 @@ function gameOverScreen() {
   restartBtn.className = "btn btn-primary mt-3";
   restartBtn.addEventListener("click", restartGame);
   optionsContainer.appendChild(restartBtn);
+  returnHomeBtn.style.display = "inline";
 }
 
 function restartGame() {
@@ -388,7 +390,8 @@ function gameCompleteScreen() {
   restartBtn.className = "btn btn-primary mt-3";
   restartBtn.addEventListener("click", restartGame);
   optionsContainer.appendChild(restartBtn);
-  conffeti();
+  returnHomeBtn.style.display = "inline";
+  confetti();
 }
 
 

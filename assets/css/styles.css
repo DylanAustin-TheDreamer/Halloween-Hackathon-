@@ -524,6 +524,16 @@ h1, h2, h3, h4 {
   #start-button > img {
 	width: 350px;
   }
+
+  .game-body {
+	height: auto;
+  }
+  .game-body h1{
+	font-size: xx-large;
+  }
+  .game-body .overlay {
+	font-size: medium;
+  }
 }
 @media (min-width: 1024px) {
   /* Styles for larger screens */
