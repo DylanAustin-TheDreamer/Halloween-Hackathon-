@@ -141,6 +141,8 @@ function animateGhosts() {
     message.innerText = "Oh no! You got it wrong!";
     returnToGame();
 }
+
+
 function animateCup(){
     cupImg.classList.remove('ghost');
     cupImg.classList.add('ghost-visible');
@@ -156,6 +158,7 @@ function animateCup(){
     message.innerText = "Congratulations! You solved the riddle!";
     returnToGame();
 }
+
 
 // stop all music function
 function stopAllMusic() {
@@ -260,6 +263,17 @@ function checkAnswer(selectedOption, btn) {
     animateCup();
     modal.classList.remove('fade-out');
 
+    // game complete check
+
+    setTimeout(() => {
+        currentRiddleIndex++;
+        if (currentRiddleIndex >= riddles.length) {
+            gameCompleteScreen(); // stop game at the end
+        } else {
+            loadRiddle();
+        }
+    }, 1500); 
+
   } else {
     attemptsLeft--;
     attemptsLeftEl.textContent = `Attempts left: ${attemptsLeft}`;
@@ -296,9 +310,12 @@ function disableOptions() {
 }
 
 
-// Next riddle
 function nextRiddle() {
   currentRiddleIndex = (currentRiddleIndex + 1) % riddles.length;
+  if (currentRiddleIndex >= riddles.length) {
+    gameCompleteScreen(); // 🎉 show ending
+    return;
+  }
   loadRiddle();
 }
 
@@ -344,11 +361,35 @@ function restartGame() {
   failStreak = 0;
   currentRiddleIndex = 0;
   message.style.display = "none";
+  nextBtn.style.display = "inline";
   dungeon = true;
   document.body.classList.remove("game-over");
   checkStates();
   loadRiddle();
 }
+
+// Game completed screen - Magda
+
+function gameCompleteScreen() {
+  stopAllMusic();
+  successMusic = new Audio('assets/sounds/trumpets.mp3');
+  successMusic.volume = inputRange.value / 100;
+  successMusic.play();
+
+  message.classList.add("show");
+  message.innerText = "🏆 Congratulations! You’ve solved all the riddles!";
+
+  optionsContainer.innerHTML = "";
+  nextBtn.style.display = "none";
+
+  const restartBtn = document.createElement("button");
+  restartBtn.textContent = "Play Again";
+  restartBtn.className = "btn btn-primary mt-3";
+  restartBtn.addEventListener("click", restartGame);
+  optionsContainer.appendChild(restartBtn);
+  conffeti();
+}
+
 
 // Dylan
 
@@ -404,7 +445,6 @@ function returnToGame() {
     dungeon = true;
     checkStates();
     modal.classList.add('fade-out');
-    nextRiddle();
     }
   });
     } else if(complete){
@@ -419,7 +459,6 @@ function returnToGame() {
     dungeon = true;
     checkStates();
     modal.classList.add('fade-out');
-    nextRiddle();
   });
   } else if(fail){
   deathMusic.addEventListener('ended', function() {
@@ -433,7 +472,6 @@ function returnToGame() {
       dungeon = true;
       checkStates();
       modal.classList.add('fade-out');
-      nextRiddle();
   });
   }
 }
