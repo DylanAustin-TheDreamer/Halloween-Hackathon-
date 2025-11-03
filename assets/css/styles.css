@@ -216,24 +216,38 @@ body {
 
 }
 
+/* Game message */
+
 #message {
-  font-family: 'Macondo', cursive;
-  position: fixed;
-  font-size: 40px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  z-index: 1001;
-  display: flex;
-	justify-content: center;
-	align-items: center;
-	top: 100px;
-	right: 900px;
+  font-family: 'Macondo', cursive;	
+  position: fixed;                /* Always stays in view */
+  top: 50%;                       /* Center vertically */
+  left: 50%;                      /* Center horizontally */
+  transform: translate(-50%, -50%);
   text-align: center;
-  text-transform: uppercase;
-  background-color: tomato;
-  padding: 20px;
-  display: none;
+  font-size: clamp(1.2rem, 3vw, 2rem); /* 👈 responsive font size */
+  font-weight: bold;
+  color: #ff3333;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.6);  /* translucent background */
+  border-radius: 1rem;
+  max-width: 90%;
+  width: fit-content;
+  z-index: 2000;                   /* above everything else */
+  display: none;                   /* hidden until shown */
+  word-wrap: break-word;
 }
+
+#message.show {
+  display: flex;                   /* use flex to center text nicely */
+  justify-content: center;
+  align-items: center;
+}
+
+.game-over #next-btn {
+  display: none !important;
+}
+
 
 /* Custom Input styling */
 .custom-input {
