@@ -9,25 +9,42 @@
 	</head>
 	<body class="game-body">
 		<!-- This has been removed for better Ux - Commented to keep as reference code -->
-		<!-- <div id="modal"></div>
-		<button id="enter-library">
-    	<img src="assets\images\Book-for-press.png" alt="Enter Library">
+		<!-- <div id="enable-sound"></div>
+		<div id="enter-library" style="padding: 100px;">
+    	<form>
+  			<label>
+    		<input type="checkbox" id="audio-checkbox" checked>
+    		Enable Audio
+  			</label>
+  			<button type="submit" id="submit">Submit</button>
+		</form>
+		</div>
+		<button id="mute-button">
+			<img src="assets\images\sound.png" alt="Mute/Unmute">
 		</button>
-		<button id="mute-button"> -->
-			<!-- <img src="assets\images\sound.png" alt="Mute/Unmute">
-		</button> -->
-		<!-- <div style="position: fixed; width: fit-content; height: 110px ; top: 75px; right: 100px; z-index: 1001;">
-        	<input class="custom-input" type="range" min="0" max="100" step="any" value="15">
+		<div style="position: fixed; width: fit-content; height: 110px ; top: 180px; right: 80px; z-index: 1001;">
+			<label for="volume" style="color: white; font-family: 'Macondo', cursive; font-size: 18px;" id="volume-label"></label>
+        	<input class="custom-input" type="range" min="0" max="100" step="any" value="15" id="volume">
       	</div> -->
 
+		<!-- main content -->
+
 		<div class="overlay flex">
-			<h1 style="color: rgb(211, 211, 211);">Welcome to the Wizard’s Riddles!</h1>
+			<h1 style="color: rgb(211, 211, 211);">Welcome to the Wizard’s Spooky Riddles!</h1>
 			<p style="color: rgb(211, 211, 211);">Ancient wisdom lies within these pages. Seek knowledge, and the secrets of the arcane will reveal themselves to you.</p>
 			<div class="d-grid gap-2 col-4 mx-auto">
-				<a class="btn" href="game.html">Play</a>
+				<a class="btn" href="game.html">Open The Wizard’s book!</a>
 			</div>
 		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+		<script>
+			document.querySelector('form').addEventListener('submit', function(e) {
+  				e.preventDefault(); // Prevent page reload
+  				this.style.display = 'none'; // Hide the form
+  				// Or: this.remove(); // Remove the form from the DOM
+		});
+		</script>
+		<script src="assets/js/start.js"></script>
 	</body>
 </html>
