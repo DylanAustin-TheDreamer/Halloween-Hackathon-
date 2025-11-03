@@ -359,8 +359,8 @@ body {
   z-index: 1050;
 }
 .spell-cloud-btn {
-  background: linear-gradient(135deg, #cd8142 60%, #b05412 100%);
-  color: #f9f6ff;
+  background: none;
+  color: none;
   border: none;
   border-radius: 40px;
   box-shadow: 0 0 16px 4px #c5b6ef60, 0 4px 24px 12px #222b4420;
@@ -372,9 +372,9 @@ body {
   margin: 40px;
 }
 .spell-cloud-btn:hover {
-  box-shadow: 0 0 32px 10px #c77a0680, 0 2px 32px 20px #995e1970;
+  box-shadow: none;
   transform: scale(1.07) rotate(-2deg);
-  background: linear-gradient(135deg, #6d3a10 60%, #a35e41 100%);
+  background: none;
 }
 
 
