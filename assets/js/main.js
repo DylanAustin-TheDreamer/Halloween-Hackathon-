@@ -140,6 +140,7 @@ function animateGhosts() {
     message.style.display = "block";
     message.innerText = "Oh no! You got it wrong!";
     returnToGame();
+    nextBtn.style.display = "inline";
 }
 
 
@@ -475,17 +476,3 @@ function returnToGame() {
   });
   }
 }
-
-// force handle closing modal if bootstrap fails 
-document.querySelectorAll('.btn-close, [data-bs-dismiss="modal"]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const modal = document.getElementById('how-to-play');
-    if (modal) {
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-      document.body.classList.remove('modal-open');
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
-  });
-});

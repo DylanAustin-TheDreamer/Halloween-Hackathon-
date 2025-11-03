@@ -1,5 +1,7 @@
 const buttonWizard = document.getElementById('enter-library');
-const modal = document.getElementById('modal');
+const audioCheckbox = document.getElementById('audio-checkbox');
+const submitButton = document.getElementById('submit');
+const modal = document.getElementById('enable-sound');
 // declare and load audio files and volume settings
 // Custom input volume styling
 const inputRange = document.querySelector('.custom-input');
@@ -19,11 +21,16 @@ backgroundMusic.loop = true;
 backgroundMusic.volume = inputRange.value / 100;
 const mute = document.getElementById('mute-button');
 
-buttonWizard.addEventListener('click', startGame);
+submitButton.addEventListener('click', startGame);
 function startGame() {
+    buttonWizard.classList.remove('enter-library');
     buttonWizard.style.display = 'none';
+    if (audioCheckbox.checked) {
+  			backgroundMusic.play();
+			} else {
+  			backgroundMusic.pause();
+			}
     modal.classList.add('fade-out');
-    backgroundMusic.play();
 }
 
 mute.addEventListener('click', () => {
